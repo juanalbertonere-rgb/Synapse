@@ -1,0 +1,14 @@
+{
+  "id": "81ec7dfc-e70e-4a26-8790-ebf5c86b36c4",
+  "title": "Chat",
+  "messages": [
+    {
+      "role": "user",
+      "text": "App Windows que muestre la hora y guarde notas"
+    },
+    {
+      "role": "assistant",
+      "text": "**Propuesta de proyecto:**  \nUna aplicación de escritorio para Windows que muestre la hora en tiempo real y permita crear, editar y guardar notas de forma local.\n\n| **Módulo** | **Funcionalidad principal** |\n|------------|-----------------------------|\n| **Reloj**  | Mostrar la hora actual con actualización cada segundo; opción de formato 12 h/24 h. |\n| **Notas**  | Crear, editar y eliminar notas; guardado automático en un archivo JSON o SQLite en el directorio de la aplicación. |\n| **Interfaz**| Ventana principal con panel de reloj y lista de notas; vista de detalle para cada nota. |\n| **Persistencia**| Guardado local (JSON o SQLite) y carga al iniciar la app. |\n| **Configuración**| Opciones de tema (claro/oscuro) y formato de hora. |\n\n**Tecnología recomendada (rápida y mantenible):**  \n- **Lenguaje:** C#  \n- **Framework UI:** WPF (XAML) o WinForms (según preferencia).  \n- **Persistencia:** JSON (System.Text.Json) para simplicidad o SQLite (Microsoft.Data.Sqlite) si se anticipan búsquedas avanzadas.  \n- **IDE:** Visual Studio 2022 (Community) o Rider.  \n\n---\n\n### Siguiente paso sugerido\n**Definir los requisitos funcionales y no funcionales** en un documento breve (≈1‑2 páginas). Incluye:\n\n1. **Requisitos funcionales** (ej.: “El reloj debe actualizarse cada segundo”, “Las notas se guardan automáticamente al cerrar la ventana”).  \n2. **Requisitos no funcionales** (ej.: “Compatibilidad con Windows 10/11”, “Uso máximo de 50 MB de RAM”).  \n3. **Prioridades** (MVP vs. funcionalidades opcionales).  \n\nCon este documento podrás crear el backlog inicial y generar la primera rama del repositorio (ej.: `feature/mvp`). ¿Te gustaría que te ayude a estructurar ese documento o prefieres pasar directamente a la configuración del proyecto en Git?"
+    }
+  ]
+}

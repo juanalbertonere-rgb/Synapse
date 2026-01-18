@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AutoDev SaaS - Agent Orchestrator</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-slate-900 text-white font-sans">
+    <div class="max-w-4xl mx-auto p-6">
+        <header class="mb-8 border-b border-slate-700 pb-4">
+            <h1 class="text-3xl font-bold text-cyan-400">AutoDev <span class="text-white text-sm font-light italic">v2026</span></h1>
+            <p class="text-slate-400">Orquestador: Qwen3-Coder + Devstral + DeepSeek R1</p>
+        </header>
+
+        <div class="grid gap-6">
+            <div class="bg-slate-800 p-6 rounded-xl shadow-xl border border-slate-700">
+                <label class="block mb-2 font-medium">¿Qué quieres construir hoy?</label>
+                <textarea id="ideaInput" class="w-full bg-slate-900 border border-slate-600 rounded-lg p-3 text-cyan-50 focus:ring-2 focus:ring-cyan-500 outline-none" rows="4" placeholder="Ej: Un SaaS de gestión de tareas con FastAPI y React..."></textarea>
+                <button onclick="generateProject()" id="btnGen" class="mt-4 w-full bg-cyan-600 hover:bg-cyan-500 transition-colors py-3 rounded-lg font-bold">
+                    INICIAR PIPELINE DE AGENTES
+                </button>
+            </div>
+
+            <div class="bg-black p-4 rounded-lg border border-slate-700 font-mono text-sm h-64 overflow-y-auto" id="console">
+                <p class="text-green-500">> Sistema listo. Esperando prompt...</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        async function generateProject() {
+            const idea = document.getElementById('ideaInput').value;
+            const consoleBox = document.getElementById('console');
+            const btn = document.getElementById('btnGen');
+            
+            if(!idea) return alert("Describe tu idea");
+
+            btn.disabled = true;
+            consoleBox.innerHTML += `<p class="text-blue-400 mt-2">[*] Iniciando Interpret (GPT-OSS-120B)...</p>`;
+
+            try {
+                const res = await fetch('/api/generate', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ idea: idea })
+                });
+                const data = await res.json();
+                
+                if(data.zip) {
+                    consoleBox.innerHTML += `<p class="text-green-400">[✔] ¡Proyecto generado! Descargando ${data.zip}...</p>`;
+                    window.location.href = `/download/${data.zip}`;
+                }
+            } catch (e) {
+                consoleBox.innerHTML += `<p class="text-red-500">[!] Error: ${e.message}</p>`;
+            } finally {
+                btn.disabled = false;
+            }
+        }
+    </script>
+</body>
+</html>
